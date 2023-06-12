@@ -21,7 +21,7 @@ const NavItem = ({ children, to}) => {
     ]
 
     return (
-        <nav className='flex justify-between fixed z-10 w-full py-5 px-8 text-sm font-light'>
+        <nav className='flex justify-between fixed z-10 w-full top-0 py-5 px-8 text-sm font-light'>
             <ul className='flex justify-between items-center gap-4'>
                 <li className=' font-extrabold'>
                     <NavLink to='/'>

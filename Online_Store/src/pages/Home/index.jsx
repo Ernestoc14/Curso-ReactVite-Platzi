@@ -1,9 +1,11 @@
+import Layout from "../../Components/Layout"
+
 function Home() {
 	return (
-		<div className="flex justify-center">
+		
 			<h1>Exclusive Products</h1>
-			<input placeholder="Search a Product" />
-		</div>
+			<input className="p-4 rounded-lg mt-3" placeholder="Search a Product" />
+		
 	)
 }
 

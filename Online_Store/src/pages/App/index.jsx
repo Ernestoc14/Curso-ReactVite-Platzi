@@ -21,7 +21,7 @@ const AppRoutes = () => {
 const App = () => {
 	return (
 		<BrowserRouter>
-      <Navbar />
+			<Navbar />
 			<AppRoutes />
 		</BrowserRouter>
 	)

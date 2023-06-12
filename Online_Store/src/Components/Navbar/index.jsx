@@ -21,17 +21,23 @@ const NavItem = ({ children, to}) => {
     ]
 
     return (
-        <nav className=''>
-            <ul className='flex justify-between'>
-                {children}
-                {categories.map((category) => (
+        <nav className='flex justify-between fixed z-10 w-full py-5 px-8 text-sm font-light'>
+            <ul className='flex justify-between items-center gap-4'>
+                <li className=' font-extrabold'>
+                    <NavLink to='/'>
+                        E-Shop
+                    </NavLink>
+                </li>
+                {categories.map(category =>
                     <li key={category.path}>
-                        <NavLink to={category.path} className={({isActive})=>`${isActive ? activeStyle : ""}`} >
-                            {category.name}
+                        <NavLink to={category.path} className={({isActive}) => `${isActive ? activeStyle : ""}`}>
+                        {category.name}
                         </NavLink>
                     </li>
-                ))}
-                {pages.map((page) => (
+                    )}
+            </ul>
+            <ul className='flex justify-between items-center gap-4'>
+                {pages.map(page => (
                     <li key={page.path}>
                         <NavLink to={page.path}  className={({isActive}) => `${isActive ? activeStyle : ""}`}>
                             {page.name}

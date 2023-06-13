@@ -14,7 +14,6 @@ const NavItem = ({ children, to}) => {
     ]
 
     const pages = [
-        { name: "Home", path: "/" },
         { name: "My Account", path: "/my-account" },
         { name: "My Orders", path: "/my-orders" },
         { name: "Sign In", path: "/sign-in" }

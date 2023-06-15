@@ -49,8 +49,7 @@ const NavItem = ({ children, to}) => {
                     </li>
                 ))}
                 <li className='flex'>
-                    {/* <img className='w-6 h-6 mr-2' src='../public/shopping-cart.svg'/> */}
-                    
+                    <ShoppingCartIcon className='w-6 h-6 mr-3'/>
                     {context.itemsCounter}
                 </li>
             </ul>

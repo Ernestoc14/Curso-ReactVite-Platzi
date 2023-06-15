@@ -2,6 +2,7 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { ShoppingCartContext } from "../../Context"
 import { useContext } from "react"
+import { ShoppingCartIcon } from '@heroicons/react/24/solid'
 
 const NavItem = ({ children, to}) => {
     const activeStyle = "underline"
@@ -48,7 +49,8 @@ const NavItem = ({ children, to}) => {
                     </li>
                 ))}
                 <li className='flex'>
-                    <img className='w-6 h-6 mr-2' src='../public/shopping-cart.svg'/>
+                    {/* <img className='w-6 h-6 mr-2' src='../public/shopping-cart.svg'/> */}
+                    
                     {context.itemsCounter}
                 </li>
             </ul>

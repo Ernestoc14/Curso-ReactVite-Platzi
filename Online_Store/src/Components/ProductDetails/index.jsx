@@ -10,7 +10,7 @@ const ProductDetails = () => {
         <aside className={`${context.isProductDetailsOpen ? 'flex' : 'hidden'} product-details flex-col fixed right-0 border border-black rounded-lg bg-gray-900`}>
             <div className='flex justify-between items-center p-5'>
                 <h2 className='text-xl font-medium'>Product Details</h2>
-                <XMarkIcon className='w-6 h-6'
+                <XMarkIcon className='w-6 h-6 cursor-pointer'
                     onClick={() => context.closeProductDetails()}
                 />
             </div>

@@ -4,7 +4,11 @@ import { PlusIcon } from "@heroicons/react/24/solid"
 
 const Card = (data) => {
     const context = useContext(ShoppingCartContext)
-    
+    const showProductDetails = (productDetails) => {
+        context.setProductToShow(productDetails)
+        context.openProductDetails()
+    }
+
     return (
         <div 
             className='bg-white text-black cursor-pointer w-56 h-60 rounded-lg '

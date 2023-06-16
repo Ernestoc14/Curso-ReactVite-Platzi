@@ -14,7 +14,18 @@ const ProductDetails = () => {
                     onClick={() => context.closeProductDetails()}
                 />
             </div>
-            
+            <figure className='px-5'>
+                <img
+                    className='w-full h-full rounded-lg'
+                    src={context.productToShow.image}
+                    alt={context.productToShow.title}
+                />
+            </figure>
+            <p className='flex flex-col m-3'>
+                <span className='mt-3'>${context.productToShow.price}</span>
+                <span className='mt-3'>{context.productToShow.title}</span>
+                <span className='mt-3'>{context.productToShow.category}</span>
+            </p>
         </aside>
     )
 }

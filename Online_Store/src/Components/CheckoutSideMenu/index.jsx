@@ -3,6 +3,7 @@ import { XMarkIcon } from '@heroicons/react/24/solid'
 import { useContext } from 'react'
 import { ShoppingCartContext } from '../../Context'
 import OrderCard from '../OrderCard'
+import { totalPrice } from '../../utils'
 
 const CheckoutSideMenu = () => {
     const context = useContext(ShoppingCartContext)
@@ -32,6 +33,12 @@ const CheckoutSideMenu = () => {
                     />
                     ))
                 }
+            </div>
+            <div className='px-6'>
+                <p className='flex justify-between text-lg'>
+                    <span className='font-semibold'>Total:</span>
+                    <span className='font-bold '>${totalPrice(context.shoppingCart)}</span>
+                </p>
             </div>
         </aside>
     )

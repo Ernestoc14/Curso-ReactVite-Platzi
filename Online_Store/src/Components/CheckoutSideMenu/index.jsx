@@ -13,6 +13,17 @@ const CheckoutSideMenu = () => {
         context.setShoppingCart(filteredProducts)
     }
 
+    const handleCheckout = () => {
+        const orderToAdd = {
+            date: '01.02.23',
+            products: context.shoppingCart,
+            totalProducts: context.shoppingCart.length,
+            totalPrice: totalPrice(context.shoppingCart)
+        }
+        context.setMyOrders([...context.myOrders, orderToAdd])
+        context.setShoppingCart([])
+    }
+    
     return (
         <aside className={`${context.isCheckoutSideMenuOpen ? 'flex' : 'hidden'} checkout-side-menu flex-col fixed right-0 border border-black rounded-lg bg-red-300`}>
             <div className='flex justify-between items-center p-5'>
@@ -21,7 +32,7 @@ const CheckoutSideMenu = () => {
                     onClick={() => context.closeCheckoutSideMenu()}
                 />
             </div>
-            <div className='px-6 overflow-y-scroll'>
+            <div className='px-6 overflow-y-scroll flex-1'>
                 {context.shoppingCart.map(product => (
                     <OrderCard
                         key={product.id}
@@ -35,10 +46,14 @@ const CheckoutSideMenu = () => {
                 }
             </div>
             <div className='px-6'>
-                <p className='flex justify-between text-lg'>
+                <p className='flex justify-between text-lg mb-4'>
                     <span className='font-semibold'>Total:</span>
                     <span className='font-bold '>${totalPrice(context.shoppingCart)}</span>
                 </p>
+                <button onClick={() => handleCheckout()}
+                    className='w-full p-6 bg-black text-white rounded-lg mb-6'>
+                    Checkout
+                </button>
             </div>
         </aside>
     )

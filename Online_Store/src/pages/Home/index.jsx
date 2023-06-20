@@ -10,6 +10,7 @@ function Home() {
 	useEffect(() => {
 		fetch('https://fakestoreapi.com/products/').then(response => response.json()).then(data => setItems(data))
 	}, [])
+	
 	return (
 		<Layout>
 			<h1 className=" font-semibold text-3xl">Exclusive Products</h1>

@@ -1,9 +1,10 @@
-import './styles.css'
-import { XMarkIcon } from '@heroicons/react/24/solid'
+import { Link } from 'react-router-dom'
 import { useContext } from 'react'
+import { XMarkIcon } from '@heroicons/react/24/solid'
 import { ShoppingCartContext } from '../../Context'
 import OrderCard from '../OrderCard'
 import { totalPrice } from '../../utils'
+import './styles.css'
 
 const CheckoutSideMenu = () => {
     const context = useContext(ShoppingCartContext)
@@ -23,7 +24,7 @@ const CheckoutSideMenu = () => {
         context.setMyOrders([...context.myOrders, orderToAdd])
         context.setShoppingCart([])
     }
-    
+
     return (
         <aside className={`${context.isCheckoutSideMenuOpen ? 'flex' : 'hidden'} checkout-side-menu flex-col fixed right-0 border border-black rounded-lg bg-red-300`}>
             <div className='flex justify-between items-center p-5'>
@@ -42,7 +43,7 @@ const CheckoutSideMenu = () => {
                         price={product.price}
                         handleDelete={handleDelete}
                     />
-                    ))
+                ))
                 }
             </div>
             <div className='px-6'>
@@ -50,10 +51,12 @@ const CheckoutSideMenu = () => {
                     <span className='font-semibold'>Total:</span>
                     <span className='font-bold '>${totalPrice(context.shoppingCart)}</span>
                 </p>
-                <button onClick={() => handleCheckout()}
-                    className='w-full p-6 bg-black text-white rounded-lg mb-6'>
-                    Checkout
-                </button>
+                <Link to='/my-orders/last'>
+                    <button onClick={() => handleCheckout()}
+                        className='w-full p-6 bg-black text-white rounded-lg mb-6'>
+                        Checkout
+                    </button>
+                </Link>
             </div>
         </aside>
     )

@@ -10,7 +10,7 @@ function MyOrder() {
     return (
         <Layout>
             My Order
-            <div className=' flex flex-col w-80 py-6 '>
+            <div className=' flex flex-col w-80 py-2 '>
                 {
                     context.myOrders?.slice(-1)[0].products.map(product => (
                         <OrderCard
@@ -26,3 +26,5 @@ function MyOrder() {
         </Layout>
     )
 }
+
+export default MyOrder

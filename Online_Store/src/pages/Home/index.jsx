@@ -13,8 +13,8 @@ function Home() {
 	
 	return (
 		<Layout>
-			<h1 className=" font-semibold text-3xl">Exclusive Products</h1>
-			<input className="p-4 rounded-lg mt-3" placeholder="Search a Product" />
+			<h1 className=" font-medium text-2xl my-6">Exclusive Products</h1>
+			<input className="p-4 rounded-lg" placeholder="Search a Product" />
 			<div className="grid justify-items-center gap-14 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-20 w-full max-w-screen-lg "> 
 				{items?.map(item => (
 					<Card

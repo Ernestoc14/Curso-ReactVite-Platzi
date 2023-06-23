@@ -9,10 +9,10 @@ const NavItem = ({ children, to}) => {
 
     const categories = [
         { name: "All", path: "/" },
-        { name: "Clothes", path: "/clothes" },
+        { name: "Men's Clothing", path: "/mens-clothes" },
+        { name: "Women's Clothing", path: "/womens-clothes" },
         { name: "Electronics", path: "/electronics" },
-        { name: "Furniture", path: "/furniture" },
-        { name: "Toys", path: "/toys"},
+        { name: "Jewelery", path: "/jewelery" },
         { name: "Others", path: "/others"}
     ]
 
@@ -36,8 +36,11 @@ const NavItem = ({ children, to}) => {
                 </li>
                 {categories.map(category =>
                     <li key={category.path}>
-                        <NavLink to={category.path} className={({isActive}) => `${isActive ? activeStyle : ""}`}>
+                        <NavLink to={category.path} className={({isActive}) => `${isActive ? activeStyle : ""}`}
+                            onClick={() => context.setSearchByCategory(category.name)}
+                        >
                         {category.name}
+                        
                         </NavLink>
                     </li>
                     )}

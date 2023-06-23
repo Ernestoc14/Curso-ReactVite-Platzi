@@ -11,22 +11,24 @@ function Home() {
 	const { loading } = context
 
 	const renderView = () => {
-		const itemsToRender = context.searchByTitle?.length > 0 ? context.filteredItems : context.items
-
-		if (itemsToRender?.length > 0) {
-			return (
-				itemsToRender.map(items => (
-					<Card key={items.id} data={items} />
-				))
-			)
-		} else {
+		const itemsToRender = context.searchByTitle?.lenght > 0 ? context.filteredItems : context.items
+		
+		if(itemsToRender?.length > 0) {
+			return itemsToRender?.map((item) => (
+				<Card
+					key={item.id}
+					data={item}
+				/>
+			))
+		}else{
 			return (
 				<div>
-					We don't have that product!
+					We don't have that product.
 					Sorry!
 				</div>
 			)
 		}
+	
 	}
 
 

@@ -11,24 +11,23 @@ function Home() {
 	const { loading } = context
 
 	const renderView = () => {
-		const itemsToRender = context.searchByTitle?.lenght > 0 ? context.filteredItems : context.items
-		
-		if(itemsToRender?.length > 0) {
-			return itemsToRender?.map((item) => (
-				<Card
-					key={item.id}
-					data={item}
-				/>
-			))
-		}else{
+		if (context.filteredItems?.length > 0) {
 			return (
-				<div>
-					We don't have that product.
-					Sorry!
+				context.filteredItems?.map((item) => (
+					<Card key={item.id} data={item} />
+				))
+			)
+		} else {
+			return (
+				<div className="flex justify-center items-center">
+					<p>
+						We don't have that product.
+						Sorry!
+					</p>
 				</div>
 			)
 		}
-	
+
 	}
 
 

@@ -1,7 +1,34 @@
 import { createContext, useState, useEffect } from "react"
 
 export const ShoppingCartContext = createContext()
+
+export const initializeLocalStorage = () => {
+    const accountInLocalStorage = localStorage.getItem('account')
+    const signOutInLocalStorage = localStorage.getItem('sign_out')
+    let parsedAccount
+    let parsedSignOut
+
+    if(!accountInLocalStorage) {
+        localStorage.setItem('account', JSON.stringify({}))
+        parsedAccount
+    }else{
+        parsedAccount = JSON.parse(accountInLocalStorage)
+    }
+
+    if(!signOutInLocalStorage) {
+        localStorage.setItem('sign_out', JSON.stringify(false))
+        parsedSignOut
+    }else{
+        parsedSignOut = JSON.parse(signOutInLocalStorage)
+    }
+}
+
 export const ShoppingCartProvider = ({ children }) => {
+    // My account
+    const [account, setAccount] = useState({})
+    // Sign out
+    const [signOut, setSignOut] = useState(false)
+
     // Shopping Cart Items Counter
     const [itemsCounter, setItemsCounter] = useState(0)
 
@@ -66,11 +93,11 @@ export const ShoppingCartProvider = ({ children }) => {
             return filteredItemsByCategory(items, searchByCategory)
         }
 
-        if( searchType === 'BY_TITLE_AND_CATEGORY') {
+        if (searchType === 'BY_TITLE_AND_CATEGORY') {
             return filteredItemsByCategory(items, searchByCategory).filter(item => item.title.toLowerCase().includes(searchByTitle.toLowerCase()))
         }
 
-        if( searchType === null) {
+        if (!searchType) {
             return items
         }
     }
@@ -82,7 +109,6 @@ export const ShoppingCartProvider = ({ children }) => {
         if (!searchByCategory && !searchByTitle) setFilteredItems(filterItemsBy(null, items, searchByTitle, searchByCategory))
     }, [items, searchByTitle, searchByCategory])
 
-    console.log(filteredItems)
     return (
         <ShoppingCartContext.Provider
             value={{
@@ -110,6 +136,10 @@ export const ShoppingCartProvider = ({ children }) => {
                 setSearchByTitle,
                 searchByCategory,
                 setSearchByCategory,
+                account,
+                setAccount,
+                signOut,
+                setSignOut
             }}>
             {children}
         </ShoppingCartContext.Provider>

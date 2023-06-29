@@ -1,6 +1,6 @@
 import Layout from "../../Components/Layout"
 import { Link } from "react-router-dom"
-import { useContext, useState } from "react"
+import { useContext, useState, useRef } from "react"
 import { ShoppingCartContext } from "../../Context"
 
 function SignIn() {
@@ -16,6 +16,17 @@ function SignIn() {
 
 	// View for log in or sign up
 	const [view, setView] = useState('user-info')
+
+	const form = useRef(null)
+
+	const createAnAccount = () => {
+		const formData = new FormData(form.current)
+		const data = {
+			name: formData.get('name'),
+			email: formData.get('email'),
+			password: formData.get('password')
+		}
+	}
 
 	const renderLogIn = () => {
 		return (
@@ -51,7 +62,7 @@ function SignIn() {
 		)
 	}
 
-	const createNewUser = () => {
+	const renderCreateUserInfo = () => {
 		return(
 				<form rel={form} className="flex flex-col gap-4 w-80">
 					<div className="flex flex-col gap-1">
@@ -86,7 +97,7 @@ function SignIn() {
 						/>
 					</div>
 					<Link to="/">
-					<button className="py-3 rounded-lg black text-white" onClick={createNewUser()}>
+					<button className="py-3 rounded-lg black text-white" onClick={createAnAccount()}>
 						Create User
 					</button>
 					</Link>
@@ -94,7 +105,7 @@ function SignIn() {
 			)
 	}
 
-	const renderView = () => view === 'create-user-info' ? createNewUser() : renderLogIn()
+	const renderView = () => view === 'create-user-info' ? renderCreateUserInfo() : renderLogIn()
 
 	return (
 		<Layout>

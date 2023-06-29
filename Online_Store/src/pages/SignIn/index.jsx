@@ -52,12 +52,46 @@ function SignIn() {
 	}
 
 	const createNewUser = () => {
-		// Create new view
 		return(
-			<>
-			New User
-			</>
-		)
+				<form rel={form} className="flex flex-col gap-4 w-80">
+					<div className="flex flex-col gap-1">
+						<label htmlFor="name" className="font-light text-sm">Your name:</label>
+						<input type="text" 
+							id="name"
+							name="name"
+							defaultValue={parsedAccount?.name}
+							placeholder="Name"
+							className="rounded-lg border border-black placeholder:text-sm placeholder: 
+								text-black/40 placeholder:font-light focus:outline py-2 px-4"
+						/>
+					</div>
+					<div className="flex flex-col gap-1">
+						<label htmlFor="email">Your E-mail: </label>
+						<input type="text"  
+							id="email"
+							name="email"
+							defaultValue={parsedAccount?.email}
+							placeholder="example@hotmail.com"
+							className="rounded-lg border border-black placeholder: font-light placeholder: text-sm placeholder:text-black/40 focus: outline-none py-2 px-4"
+						/>
+					</div>
+					<div  className="flex flex-col gap-1">
+						<label htmlFor="password">Your password:</label>
+						<input type="text" 
+							id="password"
+							name="password"
+							defaultValue={parsedAccount?.password}
+							placeholder="*******"
+							className="rounded-lg border border-black placeholder:font-light placeholder:text-sm placeholder:text-black/60 focus:outline-none py-2 px-4 "
+						/>
+					</div>
+					<Link to="/">
+					<button className="py-3 rounded-lg black text-white" onClick={createNewUser()}>
+						Create User
+					</button>
+					</Link>
+				</form>
+			)
 	}
 
 	const renderView = () => view === 'create-user-info' ? createNewUser() : renderLogIn()

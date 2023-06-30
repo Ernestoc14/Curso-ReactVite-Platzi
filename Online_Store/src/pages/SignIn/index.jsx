@@ -1,5 +1,5 @@
 import Layout from "../../Components/Layout"
-import { Link } from "react-router-dom"
+import { Link, Navigate } from "react-router-dom"
 import { useContext, useState, useRef } from "react"
 import { ShoppingCartContext } from "../../Context"
 
@@ -16,8 +16,15 @@ function SignIn() {
 
 	// View for log in or sign up
 	const [view, setView] = useState('user-info')
-
 	const form = useRef(null)
+
+	const handleSignIn = () => {
+		const stringifiedSignOut = JSON.stringify(false)
+		localStorage.setItem('signOut', stringifiedSignOut)
+		context.setSignOut(false)
+
+		return <Navigate replace to={'/'} />
+	}
 
 	const createAnAccount = () => {
 		const formData = new FormData(form.current)
@@ -26,11 +33,17 @@ function SignIn() {
 			email: formData.get('email'),
 			password: formData.get('password')
 		}
+		// Create Account
+		const stringifiedAccount = JSON.stringify(data)
+		localStorage.setItem('account', stringifiedAccount)
+		context.setAccount(data)
+		// Sign In
+		handleSignIn()
 	}
 
 	const renderLogIn = () => {
 		return (
-			<>
+			<div className=" w-full flex flex-col items-center">
 				<div className="w-1/6 flex flex-col mt-20">
 					<p>
 						<span>Email:</span>
@@ -44,6 +57,7 @@ function SignIn() {
 				<div className="w-1/6 flex flex-col items-center mt-10">
 					<Link to='/' className="bg-black disabled:bg-black/40 text-white w-full rounded-lg py-3 mt-4 mb-6 text-center" >
 						<button
+							onClick={() => handleSignIn()}
 							disabled={!hasUserAnAccount}
 						>
 							Log In
@@ -51,58 +65,62 @@ function SignIn() {
 					</Link>
 					<button className="font-light underline">Forgot my Password</button>
 					<button
-						className="border border-black disabled:text-black/40 disabled:border-black w-full rounded-lg py-3 mt-6 mb-2"
+						className="border border-slate-200 disabled:text-black/40 disabled:border-black w-full rounded-lg py-3 mt-6 mb-2"
 						disabled={hasUserAnAccount}
 						onClick={() => setView('create-user-info')}
 					>
 						Sign Up
 					</button>
 				</div>
-			</>
+			</div>
 		)
 	}
 
 	const renderCreateUserInfo = () => {
-		return(
-				<form rel={form} className="flex flex-col gap-4 w-80">
-					<div className="flex flex-col gap-1">
-						<label htmlFor="name" className="font-light text-sm">Your name:</label>
-						<input type="text" 
-							id="name"
-							name="name"
-							defaultValue={parsedAccount?.name}
-							placeholder="Name"
-							className="rounded-lg border border-black placeholder:text-sm placeholder: 
-								text-black/40 placeholder:font-light focus:outline py-2 px-4"
-						/>
-					</div>
-					<div className="flex flex-col gap-1">
-						<label htmlFor="email">Your E-mail: </label>
-						<input type="text"  
-							id="email"
-							name="email"
-							defaultValue={parsedAccount?.email}
-							placeholder="example@hotmail.com"
-							className="rounded-lg border border-black placeholder: font-light placeholder: text-sm placeholder:text-black/40 focus: outline-none py-2 px-4"
-						/>
-					</div>
-					<div  className="flex flex-col gap-1">
-						<label htmlFor="password">Your password:</label>
-						<input type="text" 
-							id="password"
-							name="password"
-							defaultValue={parsedAccount?.password}
-							placeholder="*******"
-							className="rounded-lg border border-black placeholder:font-light placeholder:text-sm placeholder:text-black/60 focus:outline-none py-2 px-4 "
-						/>
-					</div>
-					<Link to="/">
-					<button className="py-3 rounded-lg black text-white" onClick={createAnAccount()}>
+		return (
+			<form rel={form} className="flex flex-col gap-4 w-80">
+				<div className="flex flex-col gap-1">
+					<label htmlFor="name">Your name: </label>
+					<input
+						type="text"
+						id="name"
+						name="name"
+						defaultValue={parsedAccount?.name}
+						placeholder="Name"
+						className="rounded-lg border border-black placeholder:text-white/80 placeholder:font-light focus:outline py-2 px-4"
+					/>
+				</div>
+				<div className="flex flex-col gap-1">
+					<label htmlFor="email">Your Email: </label>
+					<input
+						type="text"
+						id="email"
+						name="email"
+						defaultValue={parsedAccount?.email}
+						placeholder="example@hotmail.com"
+						className="rounded-lg border border-black placeholder: font-light placeholder:text-white/80 focus: outline-none py-2 px-4"
+					/>
+				</div>
+				<div className="flex flex-col gap-1">
+					<label htmlFor="password">Your password: </label>
+					<input
+						type="text"
+						id="password"
+						name="password"
+						defaultValue={parsedAccount?.password}
+						placeholder="*******"
+						className="rounded-lg border border-black placeholder:font-light placeholder:text-white/80 focus:outline-none py-2 px-4 "
+					/>
+				</div>
+				<Link to="/">
+					<button
+						className=" w-full bg-black py-3 rounded-lg black text-white"
+						onClick={() => createAnAccount()}>
 						Create User
 					</button>
-					</Link>
-				</form>
-			)
+				</Link>
+			</form>
+		)
 	}
 
 	const renderView = () => view === 'create-user-info' ? renderCreateUserInfo() : renderLogIn()

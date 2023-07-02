@@ -20,7 +20,7 @@ function SignIn() {
 
 	const handleSignIn = () => {
 		const stringifiedSignOut = JSON.stringify(false)
-		localStorage.setItem('signOut', stringifiedSignOut)
+		localStorage.setItem('sign_out', stringifiedSignOut)
 		context.setSignOut(false)
 		// Redirect to home
 		return <Navigate replace to={'/'} />
@@ -55,9 +55,10 @@ function SignIn() {
 					</p>
 				</div>
 				<div className="w-1/6 flex flex-col items-center mt-10">
-					<Link to='/' className="bg-black disabled:bg-black/40 text-white w-full rounded-lg py-3 mt-4 mb-6 text-center" >
+					<Link to='/' className="bg-black text-white w-full rounded-lg py-3 mt-4 mb-6 text-center" >
 						<button
 							onClick={() => handleSignIn()}
+							className=" disabled:text-white/40"
 							disabled={!hasUserAnAccount}
 						>
 							Log In
@@ -65,7 +66,7 @@ function SignIn() {
 					</Link>
 					<button className="font-light underline">Forgot my Password</button>
 					<button
-						className="border border-slate-200 disabled:text-black/40 disabled:border-black w-full rounded-lg py-3 mt-6 mb-2"
+						className="border border-slate-200 disabled:border-black disabled:text-white/30 disabled:bg-black w-full rounded-lg py-3 mt-6 mb-2"
 						disabled={hasUserAnAccount}
 						onClick={() => setView('create-user-info')}
 					>

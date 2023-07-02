@@ -22,7 +22,7 @@ function SignIn() {
 		const stringifiedSignOut = JSON.stringify(false)
 		localStorage.setItem('signOut', stringifiedSignOut)
 		context.setSignOut(false)
-
+		// Redirect to home
 		return <Navigate replace to={'/'} />
 	}
 
@@ -78,7 +78,7 @@ function SignIn() {
 
 	const renderCreateUserInfo = () => {
 		return (
-			<form rel={form} className="flex flex-col gap-4 w-80">
+			<form ref={form} className="flex flex-col gap-4 w-80">
 				<div className="flex flex-col gap-1">
 					<label htmlFor="name">Your name: </label>
 					<input

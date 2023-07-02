@@ -31,6 +31,9 @@ const NavItem = () => {
         if (hasUserAnAccount && !isUserSignOut) {
             return (
                 <ul className='flex justify-between items-center gap-4'>
+                    <li className=' text-base'>
+                        {parsedAccount?.email}
+                    </li>
                 {pages.map(page => (
                     <li key={page.path}>
                         <NavLink to={page.path} className={({ isActive }) => `${isActive ? activeStyle : ""}`}>

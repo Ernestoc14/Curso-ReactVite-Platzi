@@ -47,11 +47,11 @@ function SignIn() {
 				<div className="w-1/6 flex flex-col mt-20">
 					<p>
 						<span>Email:</span>
-						<span>{parsedAccount?.email}</span>
+						<span> {parsedAccount?.email}</span>
 					</p>
 					<p className="mt-6 ">
 						<span>Password:</span>
-						<span>{parsedAccount?.password}</span>
+						<span> {parsedAccount?.password}</span>
 					</p>
 				</div>
 				<div className="w-1/6 flex flex-col items-center mt-10">

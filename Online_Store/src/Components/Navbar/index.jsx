@@ -13,6 +13,14 @@ const NavItem = () => {
     const parsedSignOut = JSON.parse(singOut)
     const isUserSignOut = context.singOut || parsedSignOut
 
+    // Account
+    const account = localStorage.getItem('account')
+	const parsedAccount = JSON.parse(account)
+	// Has an account
+	const noAccountInLocalStorage = parsedAccount ? Object.keys(parsedAccount).length === 0 : true
+	const noAccountInLocalState = context.account ? Object.keys(context.account).length === 0 : true
+	const hasUserAnAccount = !noAccountInLocalStorage || !noAccountInLocalState
+
     const handleSignOut = () => {
         const stringifiedSignOut = JSON.stringify(true)
         localStorage.setItem('sign_out', stringifiedSignOut)
@@ -20,7 +28,30 @@ const NavItem = () => {
     }
 
     const renderView = () => {
-        if (!isUserSignOut) {
+        if (hasUserAnAccount && !isUserSignOut) {
+            return (
+                <ul className='flex justify-between items-center gap-4'>
+                {pages.map(page => (
+                    <li key={page.path}>
+                        <NavLink to={page.path} className={({ isActive }) => `${isActive ? activeStyle : ""}`}>
+                            {page.name}
+                        </NavLink>
+                    </li>
+                ))}
+                <li className='flex'>
+                    <NavLink to='sign-in' className={({ isActive }) => `${isActive ? activeStyle : ""}`}
+                        onClick={() => handleSignOut()}
+                    >
+                        Sign Out
+                    </NavLink>
+                </li>
+                <li className='flex'>
+                    <ShoppingCartIcon className='w-6 h-6 mr-3' />
+                    {context.shoppingCart.length}
+                </li>
+            </ul>
+            )
+        } else {
             return (
                 <li className='flex'>
                     <NavLink to='sign-in' className={({ isActive }) => `${isActive ? activeStyle : ""}`}
@@ -29,29 +60,6 @@ const NavItem = () => {
                         Sign In
                     </NavLink>
                 </li>
-            )
-        } else {
-            return (
-                <ul className='flex justify-between items-center gap-4'>
-                    {pages.map(page => (
-                        <li key={page.path}>
-                            <NavLink to={page.path} className={({ isActive }) => `${isActive ? activeStyle : ""}`}>
-                                {page.name}
-                            </NavLink>
-                        </li>
-                    ))}
-                    <li className='flex'>
-                        <NavLink to='sign-in' className={({ isActive }) => `${isActive ? activeStyle : ""}`}
-                            onClick={() => handleSignOut()}
-                        >
-                            Sign Out
-                        </NavLink>
-                    </li>
-                    <li className='flex'>
-                        <ShoppingCartIcon className='w-6 h-6 mr-3' />
-                        {context.shoppingCart.length}
-                    </li>
-                </ul>
             )
         }
     }
@@ -73,8 +81,7 @@ const NavItem = () => {
         <nav className='flex justify-between fixed z-10 w-full top-0 py-5 px-8 text-sm font-light'>
             <ul className='flex justify-between items-center gap-4'>
                 <li className=' font-extrabold'>
-                    <NavLink to='/'
-                        onClick={() => context.setSearchByCategory()}
+                    <NavLink to={`${isUserSignOut ? '/sign-in' : '/'}`}
                     >
                         E-Shop
                     </NavLink>

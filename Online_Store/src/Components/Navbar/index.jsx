@@ -4,7 +4,6 @@ import { ShoppingCartContext } from "../../Context"
 import { useContext } from "react"
 import { ShoppingCartIcon } from '@heroicons/react/24/solid'
 import ThemeToggleButton from '../ThemeToggleButton'
-import { Th } from '@chakra-ui/react'
 
 const NavItem = () => {
     const context = useContext(ShoppingCartContext)

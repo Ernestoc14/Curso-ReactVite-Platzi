@@ -3,6 +3,8 @@ import { NavLink } from 'react-router-dom'
 import { ShoppingCartContext } from "../../Context"
 import { useContext } from "react"
 import { ShoppingCartIcon } from '@heroicons/react/24/solid'
+import ThemeToggleButton from '../ThemeToggleButton'
+import { Th } from '@chakra-ui/react'
 
 const NavItem = () => {
     const context = useContext(ShoppingCartContext)
@@ -15,11 +17,11 @@ const NavItem = () => {
 
     // Account
     const account = localStorage.getItem('account')
-	const parsedAccount = JSON.parse(account)
-	// Has an account
-	const noAccountInLocalStorage = parsedAccount ? Object.keys(parsedAccount).length === 0 : true
-	const noAccountInLocalState = context.account ? Object.keys(context.account).length === 0 : true
-	const hasUserAnAccount = !noAccountInLocalStorage || !noAccountInLocalState
+    const parsedAccount = JSON.parse(account)
+    // Has an account
+    const noAccountInLocalStorage = parsedAccount ? Object.keys(parsedAccount).length === 0 : true
+    const noAccountInLocalState = context.account ? Object.keys(context.account).length === 0 : true
+    const hasUserAnAccount = !noAccountInLocalStorage || !noAccountInLocalState
 
     const handleSignOut = () => {
         const stringifiedSignOut = JSON.stringify(true)
@@ -34,25 +36,26 @@ const NavItem = () => {
                     <li className=' text-base'>
                         {parsedAccount?.email}
                     </li>
-                {pages.map(page => (
-                    <li key={page.path}>
-                        <NavLink to={page.path} className={({ isActive }) => `${isActive ? activeStyle : ""}`}>
-                            {page.name}
+                    {pages.map(page => (
+                        <li key={page.path}>
+                            <NavLink to={page.path} className={({ isActive }) => `${isActive ? activeStyle : ""}`}>
+                                {page.name}
+                            </NavLink>
+                        </li>
+                    ))}
+                    <li className='flex'>
+                        <NavLink to='sign-in' className={({ isActive }) => `${isActive ? activeStyle : ""}`}
+                            onClick={() => handleSignOut()}
+                        >
+                            Sign Out
                         </NavLink>
                     </li>
-                ))}
-                <li className='flex'>
-                    <NavLink to='sign-in' className={({ isActive }) => `${isActive ? activeStyle : ""}`}
-                        onClick={() => handleSignOut()}
-                    >
-                        Sign Out
-                    </NavLink>
-                </li>
-                <li className='flex'>
-                    <ShoppingCartIcon className='w-6 h-6 mr-3' />
-                    {context.shoppingCart.length}
-                </li>
-            </ul>
+                    <li className='flex'>
+                        <ShoppingCartIcon className='w-6 h-6 mr-3' />
+                        {context.shoppingCart.length}
+                    </li>
+                    <ThemeToggleButton />
+                </ul>
             )
         } else {
             return (
@@ -81,7 +84,7 @@ const NavItem = () => {
     ]
 
     return (
-        <nav className='flex justify-between fixed z-10 w-full top-0 py-5 px-8 text-sm font-light'>
+        <nav className='flex justify-between fixed z-10 w-full top-0 py-5 px-8 text-sm font-light '>
             <ul className='flex justify-between items-center gap-4'>
                 <li className=' font-extrabold'>
                     <NavLink to={`${isUserSignOut ? '/sign-in' : '/'}`}
